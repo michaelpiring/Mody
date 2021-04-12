@@ -25,6 +25,7 @@ class CreateTbNasabah extends Migration
             $table->string('no_telepon_nasabah')->unique();
             $table->string('username_nasabah')->unique();
             $table->string('password_nasabah');
+            $table->enum('status_nasabah', ['aktif','nonaktif']);
             $table->timestamps();
         });
         Schema::enableForeignKeyConstraints();

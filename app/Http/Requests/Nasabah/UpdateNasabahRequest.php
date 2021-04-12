@@ -28,7 +28,6 @@ class UpdateNasabahRequest extends FormRequest
             'tgl_lahir_nasabah' => 'required|date',
             'alamat_nasabah' => 'required|min:10',
             'no_telepon_nasabah' => 'required|numeric',
-            'email_nasabah' => 'required|unique:tb_nasabah',
             'password_nasabah' => 'required'
         ];
     }

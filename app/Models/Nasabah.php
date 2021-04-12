@@ -19,7 +19,8 @@ class Nasabah extends Model
         'no_telepon_nasabah',
         'email_nasabah',
         'username_nasabah',
-        'password_nasabah'
+        'password_nasabah',
+        'status_nasabah'
     ];
     public $timestamps = true;
 }

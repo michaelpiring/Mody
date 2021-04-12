@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('lpd', LpdController::class);
 Route::apiResource('admin', AdminController::class);
 Route::put('admin/{admin}/aktivasi_admin', [AdminController::class,'aktivasiAdmin']);
+
+Route::apiResource('nasabah', NasabahController::class);
+Route::put('nasabah/{nasabah}/aktivasi_nasabah', [NasabahController::class,'aktivasiNasabah']);

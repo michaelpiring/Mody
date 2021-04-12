@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\Nasabah\CreateNasabahRequest;
+use App\Http\Requests\Nasabah\UpdateNasabahRequest;
 use App\Models\Nasabah;
 use App\Models\Dompet;
+
+use Illuminate\Support\Facades\Hash;
 
 class NasabahController extends Controller
 {
@@ -51,8 +54,9 @@ class NasabahController extends Controller
         $data = $request->validated();
         if($data){
             $data['password_nasabah'] = bcrypt($data['password_nasabah']);
+            $data['status_nasabah'] = 'aktif';
             $create_dompet = Dompet::create([
-                                'saldo' =>  0,
+                                'saldo_dompet' =>  0,
                             ]);
             if($create_dompet){
                 $data_dompet = Dompet::latest('created_at')->first();
@@ -129,7 +133,6 @@ class NasabahController extends Controller
                         'tgl_lahir_nasabah'         => $data['tgl_lahir_nasabah'],
                         'alamat_nasabah'          => $data['alamat_nasabah'],
                         'no_telepon_nasabah'        => $data['no_telepon_nasabah'],
-                        'email_nasabah'           => $data['email_nasabah']
 
                     ]);
                     if($result){
@@ -161,8 +164,39 @@ class NasabahController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Nasabah $nasabah)
     {
-        //
+        if($nasabah['status_nasabah']!='nonaktif'){
+            $nasabah->update([
+                'status_nasabah' => 'nonaktif'
+            ]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Berhasil Non-aktif Nasabah',
+                'data'    => $nasabah
+            ], 200);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Gagal Me-Nonaktifkan Nasabah!',
+        ], 409);
+    }
+
+    public function aktivasiNasabah(Nasabah $nasabah)
+    {
+        if($nasabah['status_nasabah']!='aktif'){
+            $nasabah->update([
+                'status_nasabah' => 'aktif'
+            ]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Berhasil Aktivasi Nasabah',
+                'data'    => $nasabah
+            ], 200);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Gagal Aktivasi Nasabah!',
+        ], 409);
     }
 }

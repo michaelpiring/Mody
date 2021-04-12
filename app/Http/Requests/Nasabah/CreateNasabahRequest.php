@@ -24,7 +24,6 @@ class CreateNasabahRequest extends FormRequest
     public function rules()
     {
         return [
-            'id_dompet' => 'required|numeric',
             'nama_nasabah' => 'required',
             'nik_nasabah' => 'required|unique:tb_nasabah',
             'tgl_lahir_nasabah' => 'required|date',
