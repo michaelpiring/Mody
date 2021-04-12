@@ -15,7 +15,10 @@ class CreateTbDetailTransaksi extends Migration
     {
         Schema::create('tb_detail_transaksi', function (Blueprint $table) {
             $table->increments('id_detail_transaksi');
-            $table->integer('id_nasabah_pengirim');
+            $table->integer('id_transaksi')->unsigned();
+            $table->foreign('id_transaksi')->references('id_transaksi')->on('tb_transaksi')->onDelete('restrict')->onUpdate('cascade');
+            $table->integer('id_nasabah_pengirim')->unsigned();
+            $table->foreign('id_nasabah_pengirim')->references('id_nasabah')->on('tb_nasabah')->onDelete('restrict')->onUpdate('cascade');
             $table->integer('id_nasabah_penerima');
             $table->string('keterangan', 199);
             $table->integer('jumlah_transaksi');

@@ -22,6 +22,7 @@ class CreateTbAdmin extends Migration
             $table->string('email_admin')->unique();
             $table->string('username_admin')->unique();
             $table->string('password_admin');
+            $table->enum('status_admin',['aktif','nonaktif']);
             $table->timestamps();
         });
     }
