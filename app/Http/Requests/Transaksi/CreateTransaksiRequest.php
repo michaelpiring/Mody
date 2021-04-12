@@ -27,6 +27,7 @@ class CreateTransaksiRequest extends FormRequest
             'id_nasabah_pengirim' => 'required|numeric',
             'id_nasabah_penerima' => 'required|numeric',
             'jumlah_transaksi' => 'required|numeric',
+            'keterangan' => 'required',
             'password_nasabah' => 'required'
         ];
     }

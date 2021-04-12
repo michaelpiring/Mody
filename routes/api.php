@@ -20,3 +20,5 @@ Route::put('admin/{admin}/aktivasi_admin', [AdminController::class,'aktivasiAdmi
 
 Route::apiResource('nasabah', NasabahController::class);
 Route::put('nasabah/{nasabah}/aktivasi_nasabah', [NasabahController::class,'aktivasiNasabah']);
+
+Route::apiResource('transaksi', TransaksiController::class);

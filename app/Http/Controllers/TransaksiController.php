@@ -5,6 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Transaksi;
 use App\Models\DetailTransaksi;
+use App\Models\Nasabah;
+use App\Models\Dompet;
+
+use Illuminate\Support\Facades\Hash;
+
+use App\Http\Requests\Transaksi\CreateTransaksiRequest;
+use Carbon\Carbon;
 
 class TransaksiController extends Controller
 {
@@ -70,7 +77,10 @@ class TransaksiController extends Controller
                 }
                 else{
                     $create_transaksi = Transaksi::create([
-                        'tgl_transaksi' => now()
+                        'id_nasabah_pengirim' => $data['id_nasabah_pengirim'],
+                        'id_nasabah_penerima' => $data['id_nasabah_penerima'],
+                        'tanggal_transaksi' => now(),
+                        'jumlah_transaksi' => $data['jumlah_transaksi']
                     ]);
                     if($create_transaksi){
                         $create_detail = DetailTransaksi::create([
@@ -86,7 +96,7 @@ class TransaksiController extends Controller
                             $dompet_nasabah_penerima['saldo_dompet']  = $dompet_nasabah_penerima['saldo_dompet']+$data['jumlah_transaksi'];
 
                             $result_nasabah_pengirim = $dompet_nasabah_pengirim->update([
-                                'saldo_dompet'  => $dompet_nasabah['saldo_dompet']
+                                'saldo_dompet'  => $dompet_nasabah_pengirim['saldo_dompet']
                             ]);
 
                             $result_nasabah_penerima = $dompet_nasabah_penerima->update([

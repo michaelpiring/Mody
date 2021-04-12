@@ -13,7 +13,7 @@ class Transaksi extends Model
     protected $fillable = [
         'id_nasabah_pengirim',
         'id_nasabah_penerima',
-        'tgl_transaksi',
+        'tanggal_transaksi',
         'jumlah_transaksi'
     ];
     public $timestamps = true;
